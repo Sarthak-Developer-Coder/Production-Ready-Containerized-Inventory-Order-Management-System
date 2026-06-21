@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import Dashboard from './components/Dashboard';
 import ProductForm from './components/ProductForm';
@@ -21,16 +21,19 @@ function App() {
   const [editingProduct, setEditingProduct] = useState(null);
 
   // Fetch all data on component mount
-  const loadAllData = useCallback(() => {
-    fetchProducts();
-    fetchCustomers();
-    fetchOrders();
-    fetchDashboard();
-  }, []);
+  const loadAllData = async () => {
+    await Promise.all([
+      fetchProducts(),
+      fetchCustomers(),
+      fetchOrders(),
+      fetchDashboard(),
+    ]);
+  };
 
   useEffect(() => {
     loadAllData();
-  }, [loadAllData]);
+  }, []);
+
 
   // Fetch functions
   const fetchProducts = async () => {
