@@ -1,27 +1,43 @@
-# 🚀 Deployment Guide
+# 🌍 Production Deployment Guide
 
-This guide walks you through deploying the Inventory & Order Management System to production using free hosting platforms.
+Complete guide to deploy the Inventory & Order Management System to production using free platforms.
+
+---
+
+## 📋 Prerequisites
+
+- GitHub account
+- Docker Hub account  
+- Render account
+- Vercel account
+- Git installed
+- Docker installed
+
+---
 
 ## Phase 1: GitHub Repository Setup
 
 ### Step 1: Create GitHub Repository
 
-1. Go to https://github.com/new
-2. Create repository named `inventory-management-system`
-3. Choose "Public" for free Docker Hub integration
-4. Do **NOT** initialize with README (we already have one)
+1. Go to [github.com/new](https://github.com/new)
+2. Create repository: `inventory-management-system`
+3. Choose "Public"
+4. Do NOT initialize with README
 5. Click "Create repository"
 
-### Step 2: Push to GitHub
+### Step 2: Initialize Git Locally
 
 ```bash
 cd "c:\Users\sarth\OneDrive\Desktop\ethara ai"
-git remote add origin https://github.com/YOUR_USERNAME/inventory-management-system.git
+git init
+git add .
+git commit -m "Initial commit: Inventory Management System"
 git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/inventory-management-system.git
 git push -u origin main
 ```
 
-Replace `YOUR_USERNAME` with your actual GitHub username.
+**Replace `YOUR_USERNAME` with your GitHub username**
 
 ---
 
@@ -29,24 +45,26 @@ Replace `YOUR_USERNAME` with your actual GitHub username.
 
 ### Step 1: Create Docker Hub Account
 
-1. Go to https://hub.docker.com/signup
+1. Visit [hub.docker.com/signup](https://hub.docker.com/signup)
 2. Complete registration
-3. Create a Personal Access Token:
+3. Create Personal Access Token:
    - Account Settings → Security → New Access Token
-   - Save the token securely
+   - Save token securely
 
 ### Step 2: Build and Push Docker Image
 
 ```bash
-# Login to Docker Hub
+# Login to Docker
 docker login
 
 # Build backend image
 cd backend
-docker build -t YOUR_USERNAME/inventory-backend:latest .
+docker build -t YOUR_USERNAME/inventory-management-backend:latest .
+docker push YOUR_USERNAME/inventory-management-backend:latest
 
-# Push to Docker Hub
-docker push YOUR_USERNAME/inventory-backend:latest
+# Tag version
+docker tag YOUR_USERNAME/inventory-management-backend:latest YOUR_USERNAME/inventory-management-backend:v1.0
+docker push YOUR_USERNAME/inventory-management-backend:v1.0
 
 # Tag with version
 docker tag YOUR_USERNAME/inventory-backend:latest YOUR_USERNAME/inventory-backend:v1.0.0
