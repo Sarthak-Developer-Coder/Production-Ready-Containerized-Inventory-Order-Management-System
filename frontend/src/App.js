@@ -32,12 +32,11 @@ function App() {
 
   useEffect(() => {
     loadAllData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   // Fetch functions
+
   const fetchProducts = async () => {
     try {
       const response = await productAPI.getAll();
